@@ -22,6 +22,8 @@ def make_out_dir(outfolder,dir_name):
 
 def run_merlin(out_file,prefix,G_ped,G_dat,m_txt,sim_log,sim_err):
 
+    out=Path(out_file,prefix)
+
     cmd = ['merlin',
     '-p',
     str(G_ped),
@@ -30,7 +32,7 @@ def run_merlin(out_file,prefix,G_ped,G_dat,m_txt,sim_log,sim_err):
     '-m',
     str(m_txt),
     '--simulate --save --prefix',
-    str(out_file)+str(prefix) 
+    str(out) 
     ]
     
     full_path=' '.join(cmd)
@@ -92,11 +94,17 @@ Folder_out=args.OUT_Folder #our path to outfolder where we want all the simulati
 No_sim=args.count_no
 
 #make log folder
-
-Log_folder_make= make_out_dir(Folder_out,"Sim_Logs")
-Log_folder = Path(Log_folder_make)
-Sim_folder_make = make_out_dir(Folder_out,"Sims")
-Sim_folder=Path(Sim_folder_make)
+if not os.path.isdir(Path(Folder_out,"Sim_Logs"))==True:
+    Log_folder_make= make_out_dir(Folder_out,"Sim_Logs")
+    Log_folder = Path(Log_folder_make)
+else:
+    Log_folder =Path(Folder_out,"Sim_Logs")
+    
+if not os.path.isdir(Path(Folder_out,"Sims"))==True:
+    Sim_folder_make = make_out_dir(Folder_out,"Sims")
+    Sim_folder=Path(Sim_folder_make)
+else:
+    Sim_folder=Path(Folder_out,"Sims")
 
 #Location of three in files
 

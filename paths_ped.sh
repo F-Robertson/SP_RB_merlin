@@ -6,5 +6,4 @@ module load Python/3.6.6-intel-2018b
 
 Out=$1
 
-
 python3.6 Py_scripts/path_to_sim.py -o ${Out} 
