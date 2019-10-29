@@ -5,6 +5,7 @@
 # This runs the simulation for the number passed by array ID
 
 module load merlin
+module load Python/3.6.6-intel-2018b
 
 Out=$1
 

@@ -6,6 +6,7 @@ Out=$2
 ped=$3
 
 module load merlin
+module load Python/3.6.6-intel-2018b
 
 echo "${In} is the path"
 
