@@ -6,7 +6,7 @@
 Out=$1
 N=$2
 
-script_path="/mnt/storage/nobackup/proj/spnmmd/"
+script_path="/mnt/storage/nobackup/proj/spnmmd/OCT19/ARRAY_SCRIPTS"
 pheno_path="/mnt/storage/nobackup/proj/spnmmd/OCT19/SIMULATION/FILES.txt"
 ped_path="${Out}/Paths_to_peds.txt"
 

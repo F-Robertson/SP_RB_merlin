@@ -12,7 +12,7 @@ echo ${SLURM_ARRAY_TASK_ID}
 
 N=${SLURM_ARRAY_TASK_ID}
 
-python3.6 /Py_scrpts/step_1.py -o ${Out} -n ${N}
+python3.6 /nobackup/proj/spnmmd/OCT19/ARRAY_SCRIPTS/Py_scripts/step_1.py -o ${Out} -n ${N}
 
 wait
 

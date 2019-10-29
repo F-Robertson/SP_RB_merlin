@@ -15,4 +15,4 @@ Sim=`awk "NR==$SLURM_ARRAY_TASK_ID" $ped`
 
 echo $Sim
 
-python3.6 step_2.py -o ${Out} -p ${In} -s ${Sim}
+python3.6 /nobackup/proj/spnmmd/OCT19/ARRAY_SCRIPTS/Py_scripts/step_2.py -o ${Out} -p ${In} -s ${Sim}

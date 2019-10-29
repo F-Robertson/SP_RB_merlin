@@ -5,7 +5,7 @@ In=$1
 Out=$2
 ped=$3
 
-script_path="/mnt/storage/nobackup/proj/spnmmd/"
+script_path="/nobackup/proj/spnmmd/OCT19/ARRAY_SCRIPTS/"
 JobID1 = "Not_DROIDS"
 
 echo "${In} is the path"
