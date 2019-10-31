@@ -23,7 +23,7 @@ def get_sampleID(file_name, suffix):
     sample_id = sample_name_in
     return sample_id
 
-def run_analysis(P_ped,S_ped,P_dat,S_dat,m_file,out_path,sample_id,A_log,A_err):
+def run_analysis(P_ped,S_ped,P_dat,S_dat,m_file,out_path,A_log,A_err):
 
     cmd=["merlin",
     '-p',
@@ -37,7 +37,7 @@ def run_analysis(P_ped,S_ped,P_dat,S_dat,m_file,out_path,sample_id,A_log,A_err):
     '--useCovariates',
     '--tabulate',
     '--prefix',
-    str(out_path)+str(sample_id)
+    str(out_path)
     ]
 
     full_path=' '.join(cmd)
@@ -101,8 +101,13 @@ Folder_out = args.OUT_Folder
 Sim_file =args.sim
 
 Map_file = Path("/nobackup/proj/spnmmd/OCT19/SIMULATION/MAP.txt")
-Log_folder_make = make_out_dir(Folder_out,"Analysis_Logs")
-Log_folder=Path(Log_folder_make)
+
+if not os.path.isdir(Path(Folder_out,"Analysis_Logs"))==True:
+    Log_folder_make = make_out_dir(Folder_out,"Analysis_Logs")
+    Log_folder=Path(Log_folder_make)
+else:
+    Log_folder=Path(Folder_out,"Analysis_Logs")
+
 
 
 #suffixes
@@ -114,23 +119,35 @@ dat_suff=".dat"
 sim_ped = Path(Sim_file)
 #dat
 sim_path = os.path.dirname(Sim_file)
-samp_id = get_sampleID(Sim_file,ped_suff)
+samp_id = get_sampleID(os.path.basename(Sim_file),ped_suff)
 dat_name = samp_id+dat_suff
 sim_dat=Path(sim_path,dat_name)
 
-pheno_name = os.path.basename(pheno_folder)
+pheno_name = os.path.basename(os.path.normpath(pheno_folder))
+print(pheno_name)
 
+pheno_ped=Path(pheno_folder,pheno_name+ped_suff)
+pheno_dat=Path(pheno_folder,pheno_name+dat_suff)
 
-for file_in in pheno_folder:
-    if file_in.endswith(ped_suff):
-        pheno_ped=Path(pheno_folder,file_in)
+#def id_pheno(pheno_folder,ped_suff,dat_suff):
+#    for file_in in pheno_folder:
+#        if file_in.endswith(ped_suff):
+#            pheno_ped=Path(pheno_folder,file_in)#
+#
+#        elif file_in.endswith(dat_suff):
+#            pheno_dat=Path(pheno_folder,file_in)
+#        else:
+#            continue
+#return pheno_ped,pheno_dat
 
-    elif file_in.endswith(dat_suff):
-        pheno_dat=Path(pheno_folder,file_in)
-    else:
-        continue
+#pheno_ped, pheno_dat = id_pheno(pheno_folder, ped_suff, dat_suff)
 
-New_out=Path(Folder_out,pheno_name)
+if not os.path.isdir(Path(Folder_out,pheno_name))==True:
+    Log_folder_make = make_out_dir(Folder_out,pheno_name)
+    New_out=Path(Folder_out,pheno_name)
+else:
+   New_out=Path(Folder_out,pheno_name)
+
 out_path=Path(New_out,samp_id)
 
 full_name=str(pheno_name)+"_"+str(samp_id)
@@ -138,7 +155,7 @@ full_name=str(pheno_name)+"_"+str(samp_id)
 Analysis_Log=Logger(full_name,Log_folder)
 Analysis_Log.open()
 
-run_analysis(pheno_ped,sim_ped,pheno_dat,sim_dat,Map_file,out_path,samp_id,Analysis_Log.log_file,Analysis_Log.err_file)
+run_analysis(pheno_ped,sim_ped,pheno_dat,sim_dat,Map_file,out_path,Analysis_Log.log_file,Analysis_Log.err_file)
 
 
 

@@ -21,6 +21,7 @@ sleep 2
 echo ${job1} 
 j1=${job1} 
 
+sbatch --job-name=run_Sim --array=1-3%100 /mnt/storage/nobackup/proj/spnmmd/OCT19/ARRAY_SCRIPTS/Step_1.sh /nobackup/proj/spnmmd/OCT19/SIMULATION/TEST_OUT
 
 #find paths to simulations and writing to a file
 job2=$(sbatch --parsable --dependency=afterok::$j1 --job-name="${JobID2}" ${script_path}/paths_ped.sh "${Out}")
