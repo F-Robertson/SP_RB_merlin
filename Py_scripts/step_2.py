@@ -100,7 +100,7 @@ pheno_folder = args.pheno
 Folder_out = args.OUT_Folder
 Sim_file =args.sim
 
-Map_file = Path("/nobackup/proj/spnmmd/OCT19/SIMULATION/MAP.txt")
+Map_file = Path("/nobackup/proj/spnmmd/NOV19/SIMULATION/GENO_FILES/MAP.txt")
 
 if not os.path.isdir(Path(Folder_out,"Analysis_Logs"))==True:
     Log_folder_make = make_out_dir(Folder_out,"Analysis_Logs")

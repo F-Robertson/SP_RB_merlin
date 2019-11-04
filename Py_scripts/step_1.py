@@ -88,7 +88,7 @@ def parse_command_line():
 args = parse_command_line()
 
 # set arguments as variables 
-Folder_in=Path("/nobackup/proj/spnmmd/NOV19/SIMULATION/GENO_FILES/") #hardcoded location of geno.ped/geno.dat/map.txt
+Folder_in=Path("/nobackup/proj/spnmmd/NOV19/SIMULATION/GENO_FILES") #hardcoded location of geno.ped/geno.dat/map.txt
 Folder_out=args.OUT_Folder #our path to outfolder where we want all the simulation going 
 
 No_sim=args.count_no
