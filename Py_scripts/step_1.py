@@ -8,6 +8,7 @@
 #############################################
 import pathlib, subprocess, os, re, argparse
 from pathlib import Path
+from random import randint
 
 #############################################
 # functions
@@ -20,7 +21,7 @@ def make_out_dir(outfolder,dir_name):
     return directory
 
 
-def run_merlin(out_file,prefix,G_ped,G_dat,m_txt,sim_log,sim_err):
+def run_merlin(out_file,prefix,G_ped,G_dat,m_txt,seed,sim_log,sim_err):
 
     out=Path(out_file,prefix)
 
@@ -31,7 +32,9 @@ def run_merlin(out_file,prefix,G_ped,G_dat,m_txt,sim_log,sim_err):
     str(G_dat),
     '-m',
     str(m_txt),
-    '--simulate --save --prefix',
+    '--simulate -r',
+    str(seed),
+    '--save --prefix',
     str(out) 
     ]
     
@@ -87,6 +90,11 @@ def parse_command_line():
 
 args = parse_command_line()
 
+def random_with_N_digits(n):
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return randint(range_start, range_end)
+
 # set arguments as variables 
 Folder_in=Path("/nobackup/proj/spnmmd/NOV19/SIMULATION/GENO_FILES") #hardcoded location of geno.ped/geno.dat/map.txt
 Folder_out=args.OUT_Folder #our path to outfolder where we want all the simulation going 
@@ -119,14 +127,7 @@ prefix="rep_no_"+str(No_sim)
 Sim_logger=Logger("sim"+str(No_sim),Path(Log_folder))
 Sim_logger.open()
 
-run_merlin(Sim_folder,prefix,G_ped,G_dat,m_txt,Sim_logger.log_file,Sim_logger.err_file)
+seed = random_with_N_digits(6)
+print(seed)
 
-
-
-
-
-
-
-
-
-
+run_merlin(Sim_folder,prefix,G_ped,G_dat,m_txt,seed,Sim_logger.log_file,Sim_logger.err_file)
