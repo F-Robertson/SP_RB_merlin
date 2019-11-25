@@ -32,7 +32,7 @@ def run_analysis(P_ped,S_ped,P_dat,S_dat,m_file,out_path,A_log,A_err):
     str(P_dat)+','+str(S_dat),
     '-m',
     str(m_file),
-    '--vc',
+    '--vc -x X',
     '--markerNames',
     '--useCovariates',
     '--tabulate',

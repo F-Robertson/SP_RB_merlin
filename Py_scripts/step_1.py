@@ -32,7 +32,7 @@ def run_merlin(out_file,prefix,G_ped,G_dat,m_txt,seed,sim_log,sim_err):
     str(G_dat),
     '-m',
     str(m_txt),
-    '--simulate -r',
+    '-x X --simulate -r',
     str(seed),
     '--save --prefix',
     str(out) 
