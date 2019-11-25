@@ -2,13 +2,13 @@
 #SBATCH -A spnmmd
 
 
-# run vis sbatch Launcher.sh /nobackup/proj/spnmmd/NOV19/SIMULATION/OUTPUT  10
+# run vis sbatch Launcher.sh /nobackup/proj/spnmmd/DEC19/SIMULATION/OUTPUT  3
 
 Out=$1
 N=$2
 
-script_path="/mnt/storage/nobackup/proj/spnmmd/NOV19/SIMULATION/ARRAY_SCRIPTS"
-pheno_path="/mnt/storage/nobackup/proj/spnmmd/NOV19/SIMULATION/FILES.txt"
+script_path="/mnt/storage/nobackup/proj/spnmmd/DEC19/SIMULATION/ARRAY_SCRIPTS"
+pheno_path="/mnt/storage/nobackup/proj/spnmmd/DEC19/SIMULATION/FILES.txt"
 ped_path="${Out}/Paths_to_peds.txt"
 
 JobID1="run_Sim"
@@ -21,7 +21,7 @@ sleep 2
 echo ${job1} 
 j1=${job1} 
 
-sbatch --job-name=run_Sim --array=1-3%100 /mnt/storage/nobackup/proj/spnmmd/NOV19/SIMULATION/ARRAY_SCRIPTS/Step_1.sh /nobackup/proj/spnmmd/NOV19/SIMULATION/OUTPUT
+sbatch --job-name=run_Sim --array=1-3%100 /mnt/storage/nobackup/proj/spnmmd/DEC19/SIMULATION/ARRAY_SCRIPTS/Step_1.sh /nobackup/proj/spnmmd/DEC19/SIMULATION/OUTPUT
 
 #find paths to simulations and writing to a file
 job2=$(sbatch --parsable --dependency=afterok:"$j1" --job-name="${JobID2}" ${script_path}/paths_ped.sh "${Out}")
